@@ -1,0 +1,240 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Control de Asistencia CEPRIJA">
+	<main
+		class="min-h-screen flex flex-col items-center justify-center bg-gray-50 text-gray-800"
+	>
+		<div class="w-full max-w-4xl p-6">
+			<!-- Header with Logo -->
+			<header class="flex flex-col items-center mb-10">
+				<!-- <div
+					class="bg-[#1e3a8a] text-white p-4 rounded-full w-24 h-24 flex items-center justify-center mb-4 shadow-lg"
+				>
+					<span class="text-3xl font-bold">C</span>
+				</div> -->
+				<h1 class="text-4xl font-bold text-[#1e3a8a] text-center">
+					CEPRIJA
+				</h1>
+				<p class="text-xl text-[#fbbf24] font-semibold mt-2">
+					Sistema de Control de Asistencia
+				</p>
+			</header>
+
+			<!-- Scanner Status / Last Scanned -->
+			<div
+				id="status-container"
+				class="bg-white rounded-xl shadow-2xl p-8 min-h-[400px] flex flex-col items-center justify-center transition-all duration-300 border-t-8 border-[#1e3a8a]"
+			>
+				<!-- Placeholder State -->
+				<div id="ready-state" class="text-center">
+					<div class="animate-pulse mb-6 text-[#1e3a8a]">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="w-24 h-24 mx-auto"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z"
+							></path>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M6.75 6.75h.75v.75h-.75v-.75zM6.75 16.5h.75v.75h-.75v-.75zM16.5 6.75h.75v.75h-.75v-.75zM13.5 13.5h.75v.75h-.75v-.75zM13.5 19.5h.75v.75h-.75v-.75zM19.5 13.5h.75v.75h-.75v-.75zM16.5 16.5h.75v.75h-.75v-.75z"
+							></path>
+						</svg>
+					</div>
+					<h2 class="text-2xl font-bold text-gray-700">
+						Listo para escanear
+					</h2>
+					<p class="text-gray-500 mt-2">
+						Pase su tarjeta o código de barras por el lector
+					</p>
+				</div>
+
+				<!-- Result State (Hidden by default) -->
+				<div id="result-state" class="hidden w-full text-center">
+					<div id="result-icon" class="mb-6 flex justify-center">
+						<!-- Injected by JS -->
+					</div>
+					<h2
+						id="employee-name"
+						class="text-3xl font-bold text-[#1e3a8a] mb-2"
+					>
+					</h2>
+					<p id="employee-dept" class="text-xl text-gray-600 mb-6">
+					</p>
+					<div
+						id="timestamp"
+						class="text-lg bg-gray-100 py-2 px-6 rounded-lg inline-block text-gray-800 font-mono"
+					>
+					</div>
+				</div>
+
+				<!-- Error State (Hidden by default) -->
+				<div id="error-state" class="hidden text-center">
+					<div class="text-red-600 mb-6">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="w-24 h-24 mx-auto"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+							></path>
+						</svg>
+					</div>
+					<h2
+						id="error-message"
+						class="text-2xl font-bold text-red-600"
+					>
+						Error
+					</h2>
+				</div>
+			</div>
+
+			<footer class="mt-10 text-center text-gray-400 text-sm">
+				<a
+					href="/reports"
+					class="text-[#1e3a8a] hover:underline font-semibold mb-2 inline-block"
+					>📊 Ver Reportes de Asistencia</a
+				>
+				<br />
+				&copy; {new Date().getFullYear()} CEPRIJA - Sistema de Gestión Escolar
+			</footer>
+		</div>
+	</main>
+
+	<script>
+		// Use a local scope to avoid global variable leaks if needed, but in Astro modules are scoped.
+		let buffer = "";
+		let lastKeyTime = Date.now();
+		let resetTimer: any = null; // Store timer ID
+		const SCANNER_TIMEOUT = 50; // ms between keys to consider it part of a scan
+
+		const readyState = document.getElementById("ready-state");
+		const resultState = document.getElementById("result-state");
+		const errorState = document.getElementById("error-state");
+		const statusContainer = document.getElementById("status-container");
+
+		const employeeName = document.getElementById("employee-name");
+		const employeeDept = document.getElementById("employee-dept");
+		const timestampDisplay = document.getElementById("timestamp");
+		const errorMessage = document.getElementById("error-message");
+
+		function resetUI() {
+			if (resetTimer) clearTimeout(resetTimer); // Clear any pending timer
+			readyState?.classList.remove("hidden");
+			resultState?.classList.add("hidden");
+			errorState?.classList.add("hidden");
+			statusContainer?.classList.remove(
+				"border-green-500",
+				"border-red-500",
+				"border-orange-500",
+			);
+			statusContainer?.classList.add("border-[#1e3a8a]");
+		}
+
+		function showSuccess(data: any) {
+			if (resetTimer) clearTimeout(resetTimer); // Clear previous timer
+
+			readyState?.classList.add("hidden");
+			errorState?.classList.add("hidden");
+			resultState?.classList.remove("hidden");
+
+			statusContainer?.classList.remove("border-[#1e3a8a]");
+			// Color code based on status
+			if (data.status === "ENTRADA") {
+				statusContainer?.classList.add("border-green-500");
+			} else {
+				statusContainer?.classList.add("border-orange-500");
+			}
+
+			if (employeeName) employeeName.textContent = data.employee.name;
+			if (employeeDept)
+				employeeDept.textContent =
+					data.status + " - " + data.employee.department;
+			if (timestampDisplay)
+				timestampDisplay.textContent = new Date().toLocaleTimeString();
+
+			// Handle Image
+			const resultIcon = document.getElementById("result-icon");
+			if (resultIcon) {
+				// Increased size to w-64 h-64 (16rem / 256px)
+				resultIcon.innerHTML = `<img src="${data.employee.photo}" alt="${data.employee.name}" class="w-64 h-64 rounded-full border-4 border-[#1e3a8a] object-cover shadow-lg" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(data.employee.name)}&background=random'">`;
+			}
+
+			// Auto reset after 60 seconds (1 minute) as requested
+			resetTimer = setTimeout(resetUI, 10000);
+		}
+
+		function showError(msg: string) {
+			if (resetTimer) clearTimeout(resetTimer); // Clear previous timer
+
+			readyState?.classList.add("hidden");
+			resultState?.classList.add("hidden");
+			errorState?.classList.remove("hidden");
+
+			statusContainer?.classList.remove("border-[#1e3a8a]");
+			statusContainer?.classList.add("border-red-500");
+
+			if (errorMessage) errorMessage.textContent = msg;
+
+			resetTimer = setTimeout(resetUI, 3000);
+		}
+
+		async function processScan(code: string) {
+			if (resetTimer) clearTimeout(resetTimer); // Cancel reset if scanning again
+			try {
+				const res = await fetch("/api/checkin", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ code }),
+				});
+
+				const data = await res.json();
+
+				if (res.ok) {
+					showSuccess(data);
+				} else {
+					showError(data.error || "Error al registrar");
+				}
+			} catch (e) {
+				showError("Error de conexión");
+			}
+		}
+
+		document.addEventListener("keydown", (e) => {
+			const currentTime = Date.now();
+
+			if (currentTime - lastKeyTime > SCANNER_TIMEOUT) {
+				buffer = ""; // Reset buffer if typing is too slow (manual input)
+			}
+
+			lastKeyTime = currentTime;
+
+			if (e.key === "Enter") {
+				if (buffer.length > 0) {
+					processScan(buffer);
+					buffer = "";
+				}
+			} else {
+				// Ignore non-character keys if needed, but scanners usually send printable chars
+				if (e.key.length === 1) {
+					buffer += e.key;
+				}
+			}
+		});
+	</script>
+</Layout>

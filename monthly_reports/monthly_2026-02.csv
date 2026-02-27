@@ -1,0 +1,5 @@
+employee_id,name,department,attendances,delays,absences
+CEP001,Juan Perez,Administracion,3,0,2
+CEP002,Maria Lopez,Docencia,0,0,5
+CEP003,Carlos Ruiz,Seguridad,0,0,5
+CEP004,Ana Garcia,Mantenimiento,0,0,5

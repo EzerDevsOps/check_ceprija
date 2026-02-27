@@ -1,0 +1,9 @@
+timestamp,date,time,employee_id,status,name,department
+2026-02-16T20:42:51.691Z,16/2/2026,2:42:51 p.m.,EMP001,ENTRADA,Juan Perez,Administracion
+2026-02-16T20:43:04.401Z,16/2/2026,2:43:04 p.m.,EMP001,SALIDA,Juan Perez,Administracion
+2026-02-16T20:45:40.098Z,16/2/2026,2:45:40 p.m.,EMP002,ENTRADA,Maria Lopez,Docencia
+2026-02-16T20:46:23.417Z,16/2/2026,2:46:23 p.m.,EMP002,SALIDA,Maria Lopez,Docencia
+2026-02-16T20:46:42.350Z,16/2/2026,2:46:42 p.m.,EMP002,ENTRADA,Maria Lopez,Docencia
+2026-02-16T20:46:45.109Z,16/2/2026,2:46:45 p.m.,EMP002,SALIDA,Maria Lopez,Docencia
+2026-02-16T20:46:54.149Z,16/2/2026,2:46:54 p.m.,EMP001,ENTRADA,Juan Perez,Administracion
+2026-02-16T20:46:55.638Z,16/2/2026,2:46:55 p.m.,EMP001,SALIDA,Juan Perez,Administracion

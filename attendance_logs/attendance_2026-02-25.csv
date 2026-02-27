@@ -1,0 +1,5 @@
+timestamp,date,time,employee_id,status,name,department,hours
+2026-02-25T19:51:48.063Z,25/2/2026,1:51:48 p.m.,CEP001,ENTRADA,Juan Perez,Administracion,0
+2026-02-25T23:17:50.888Z,25/2/2026,5:17:50 p.m.,CEP001,SALIDA,Juan Perez,Administracion,3.43
+2026-02-25T23:27:42.038Z,25/2/2026,5:27:42 p.m.,CEP001,ENTRADA,Juan Perez,Administracion,0
+2026-02-26T00:58:15.789Z,25/2/2026,6:58:15 p.m.,CEP001,SALIDA,Juan Perez,Administracion,1.51
