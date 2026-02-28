@@ -82,14 +82,16 @@ export function computeAttendanceStatus(
     delayMinutes: number
 ): 'PUNTUAL' | 'RETRASO' {
     const scanDate = new Date(scanTimestamp);
-    const [h, m] = scheduledCheckIn.split(':').map(Number);
 
-    // Build "scheduled" date using the local date of the scan
-    const scheduled = new Date(scanDate);
-    scheduled.setHours(h, m, 0, 0);
+    // Obtenemos la hora del escaneo en la zona de México (formato de 24 horas)
+    const mxTimeStr = scanDate.toLocaleTimeString('en-GB', { timeZone: 'America/Mexico_City', hour12: false });
+    const [scanH, scanM] = mxTimeStr.split(':').map(Number);
+    const [schH, schM] = scheduledCheckIn.split(':').map(Number);
 
-    const diffMs = scanDate.getTime() - scheduled.getTime();
-    const diffMinutes = diffMs / 60000;
+    const scanTotalMinutes = scanH * 60 + scanM;
+    const schTotalMinutes = schH * 60 + schM;
+
+    const diffMinutes = scanTotalMinutes - schTotalMinutes;
 
     return diffMinutes <= delayMinutes ? 'PUNTUAL' : 'RETRASO';
 }
@@ -102,8 +104,12 @@ export function getDailyFilePath(dateStr: string): string {
 
 export function getTodayDateStr(): string {
     const now = new Date();
-    const yyyy = now.getFullYear();
-    const mm = String(now.getMonth() + 1).padStart(2, '0');
-    const dd = String(now.getDate()).padStart(2, '0');
-    return `${yyyy}-${mm}-${dd}`;
+    // Utilizamos fr-CA porque su formato estándar es YYYY-MM-DD
+    const formatter = new Intl.DateTimeFormat('fr-CA', {
+        timeZone: 'America/Mexico_City',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+    return formatter.format(now);
 }

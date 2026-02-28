@@ -61,8 +61,8 @@ export const POST: APIRoute = async ({ request }) => {
         // 4. Record
         const now = new Date();
         const timestamp = now.toISOString();
-        const date = now.toLocaleDateString('es-MX');
-        const time = now.toLocaleTimeString('es-MX');
+        const date = now.toLocaleDateString('es-MX', { timeZone: 'America/Mexico_City' });
+        const time = now.toLocaleTimeString('es-MX', { timeZone: 'America/Mexico_City' });
 
         // Calculate hours worked for SALIDA
         let hours = '0';
