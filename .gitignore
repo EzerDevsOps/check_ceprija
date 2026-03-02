@@ -22,3 +22,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# attendance logs
+attendance_logs/
+monthly_reports/
+

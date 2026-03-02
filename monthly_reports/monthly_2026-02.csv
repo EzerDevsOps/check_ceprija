@@ -1,5 +1,13 @@
 employee_id,name,department,attendances,delays,absences
-CEP001,Juan Perez,Administracion,3,0,2
-CEP002,Maria Lopez,Docencia,0,0,5
-CEP003,Carlos Ruiz,Seguridad,0,0,5
-CEP004,Ana Garcia,Mantenimiento,0,0,5
+ADM2401,Diana Laura Hernández Ventura,Dirección de Planeación Administrativa y Finanzas,0,0,6
+ACA2401,Carlos Enrique Hernández Ventura,Dirección Académica,0,0,6
+SEC2401,Federico Emmanuel Hernández Ventura,Secretaría General,0,0,6
+TI2501,Andrick Emiliano Hernández Oliden,Dpto. Tecnologías de la Información (TI),0,0,6
+COM2601,María José Alatorre Duran,Comunicación Social,0,0,6
+MKT2601,Zulma Ortíz Aguillón,Marketing | Diseño,0,0,6
+WEB2501,Eliezer Moo Naal,Desarrollo Web,0,0,6
+ESC2601,Jesús Valentina Serrano Díaz,Dpto. de Servicios Escolares,0,0,6
+SGG2401,Daniel González Torres,Dpto. de SSGG,0,0,6
+REC2601,Ana Paola Olvera Segura,Recepción,0,1,5
+LIMP2501,Tereza Estrada Sandoval,Limpieza,0,0,6
+RECT2601,Dra. Verónica Elizabeth Ucaranza Sánchez,Rectoría,0,0,6

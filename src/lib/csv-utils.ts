@@ -80,7 +80,7 @@ export function computeAttendanceStatus(
     scheduledCheckIn: string, // "09:00"
     scanTimestamp: string,    // ISO string
     delayMinutes: number
-): 'PUNTUAL' | 'RETRASO' {
+): 'PUNTUAL' | 'RETRASO' | 'AUSENCIA' {
     const scanDate = new Date(scanTimestamp);
 
     // Obtenemos la hora del escaneo en la zona de México (formato de 24 horas)
@@ -93,7 +93,16 @@ export function computeAttendanceStatus(
 
     const diffMinutes = scanTotalMinutes - schTotalMinutes;
 
-    return diffMinutes <= delayMinutes ? 'PUNTUAL' : 'RETRASO';
+    // Lógica de estados:
+    if (diffMinutes <= delayMinutes) {
+        return 'PUNTUAL';
+    } else if (diffMinutes > delayMinutes && diffMinutes <= 30) {
+        // Se registra como retraso, pero sigue siendo una "entrada" válida en el flujo
+        return 'RETRASO';
+    } else {
+        // Más de 30 minutos se considera falta/ausencia
+        return 'AUSENCIA';
+    }
 }
 
 export const DAILY_HEADER = 'timestamp,date,time,employee_id,status,name,department,hours,attendance_status\n';

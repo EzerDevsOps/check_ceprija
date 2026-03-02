@@ -64,7 +64,7 @@ export const GET: APIRoute = async ({ url }) => {
             // Evaluate each employee
             for (const emp of employees) {
                 if (!stats[emp.id]) continue;
-                if (dayEntradas[emp.id] === undefined) {
+                if (dayEntradas[emp.id] === undefined || dayEntradas[emp.id] === 'AUSENCIA') {
                     stats[emp.id].absences++;
                 } else if (dayEntradas[emp.id] === 'RETRASO') {
                     stats[emp.id].delays++;
