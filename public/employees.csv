@@ -1,13 +1,13 @@
 id,name,department,check-in,check-out,delay,photo
-ADM2401,Diana Laura Hernández Ventura,Dirección de Planeación Administrativa y Finanzas,9:00,18:00,15,/employees/diana_laura_hernandez_ventura.jpg
-ACA2401,Carlos Enrique Hernández Ventura,Dirección Académica,9:00,18:00,15,/employees/carlos_enrique_hernandez_ventura.jpg
-SEC2401,Federico Emmanuel Hernández Ventura,Secretaría General,9:00,18:00,15,/employees/federico_emmanuel_hernandez_ventura.jpg
-TI2501,Andrick Emiliano Hernández Oliden,Dpto. Tecnologías de la Información (TI),9:00,18:00,15,/employees/andrick_emiliano_hernandez_oliden.jpg
-COM2601,María José Alatorre Duran,Comunicación Social,9:00,18:00,15,/employees/maria_jose_alatorre_duran.jpg
-MKT2601,Zulma Ortíz Aguillón,Marketing | Diseño,9:00,18:00,15,/employees/zulma_ortiz_aguillon.jpg
-WEB2501,Eliezer Moo Naal,Desarrollo Web,9:00,18:00,15,/employees/eliezer_moo_naal.jpg
-ESC2601,Jesús Valentina Serrano Díaz,Dpto. de Servicios Escolares,9:00,18:00,15,/employees/jesus_valentina_serrano_diaz.jpg
-SGG2401,Daniel González Torres,Dpto. de SSGG,9:00,18:00,15,/employees/daniel_gonzalez_torres.jpg
-REC2601,Ana Paola Olvera Segura,Recepción,9:00,18:00,15,/employees/ana_paola_olvera_segura.jpg
-LIMP2501,Tereza Estrada Sandoval,Limpieza,9:00,18:00,15,/employees/tereza_estrada_sandoval.jpg
-RECT2601,Dra. Verónica Elizabeth Ucaranza Sánchez,Rectoría,9:00,18:00,15,/employees/dra_veronica_elizabeth_ucaranza_sanchez.jpg
+ADM2401,Diana Laura Hernández Ventura,Dirección de Planeación Administrativa y Finanzas,9:00,18:00,15,/employees/diana.png
+ACA2401,Carlos Enrique Hernández Ventura,Dirección Académica,9:00,18:00,15,/employees/carlos.png
+SEC2401,Federico Emmanuel Hernández Ventura,Secretaría General,9:00,18:00,15,/employees/federico.png
+TI2501,Andrick Emiliano Hernández Oliden,Dpto. Tecnologías de la Información (TI),9:00,18:00,15,/employees/emiliano.png
+COM2601,María José Alatorre Duran,Comunicación Social,9:00,18:00,15,/employees/majo.png
+MKT2601,Zulma Ortíz Aguillón,Marketing | Diseño,9:00,18:00,15,/employees/zulma.png
+WEB2501,Eliezer Moo Naal,Desarrollo Web,9:00,18:00,15,/employees/eliezer.png
+ESC2601,Jesús Valentina Serrano Díaz,Dpto. de Servicios Escolares,9:00,18:00,15,/employees/valentina.png
+SGG2401,Daniel González Torres,Dpto. de SSGG,9:00,18:00,15,/employees/daniel.png
+REC2601,Ana Paola Olvera Segura,Recepción,9:00,18:00,15,/employees/ana.png
+LIMP2501,Tereza Estrada Sandoval,Limpieza,9:00,18:00,15,/employees/teresa.png
+RECT2601,Dra. Verónica Elizabeth Ucaranza Sánchez,Rectoría,9:00,18:00,15,/employees/veronica_ucaranza_sanchez.jpg
